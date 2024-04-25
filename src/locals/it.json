@@ -1,0 +1,26 @@
+{
+  "Welcome": "Benvenuto/a!",
+  "journey": "Inserisci i tuoi dati per accedere alla piattaforma.",
+  "Email": "Email",
+  "Password": "Password",
+  "ForgotPassword": "Forgot Password?",
+  "Login": "Login",
+  "NotAccount":"Non hai ancora un account?",
+  "SignUp": "Iscriviti",
+  "ConnectDevice": "Connettiti con la salute. Con un click.",
+  "EveryThing": "Everything you need is an internet connection.",
+  "Register": "Registrati",
+  "createAccount": "e crea il tuo nuovo account",
+  "firstName": "Nome",
+  "lastName": "Cognome",
+  "phoneNo": "Numero di telefono",
+  "alreadyAccount": "Hai già un account?",
+  "SignIn": "Accedi",
+  "rememberEmail": "Non preoccuparti se non ricordi più la tua password.   Possiamo aiutarti a resettarla.",
+  "forgotPassword": "Forgot Password",
+  "RequestPassword": "Richiedi una nuova password.",
+  "emailVerification": "E-mail di verifica",
+  "otpCode": "Un codice OTP è stato inviato nella tua casella e-mail. Inseriscilo qui.",
+  "Confirm": "Conferma"
+  
+}
