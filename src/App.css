@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.hero {
+  @apply flex xl:flex-row flex-col relative z-0 max-w-[1440px] h-5 mx-auto bg-hero-bg;
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
