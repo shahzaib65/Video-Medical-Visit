@@ -1,22 +1,19 @@
 import React,{Fragment} from 'react'
 import { useTranslation } from 'react-i18next';
-
 import { Bars3Icon, XMarkIcon,BellIcon } from "@heroicons/react/24/outline";
 import { Link } from 'react-router-dom';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 
-
-
-
-export const Navbar = () => {
+export const DoctorNavbar = () => {
 
     const {t} = useTranslation();
 
     const navigation = [
-  { name: t('dashboard') , link: "/home" },
-  //  { name: t('favDoctors'), link: "/" },
-  { name: t('appointment'), link: "/appointments" }
+  { name: t('slot') , link: "/doctorSlot" },
+  { name: t('appointment'), link: "/doctorAppointments" }
 ];
+
+
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
@@ -54,7 +51,7 @@ function classNames(...classes) {
                         key={item.name}
                         to={item.link}
                         className={classNames(
-                          item.current ? ' bg-white text-primary-color' : 'text-gray-300 hover:bg-white hover:text-primary-color',
+                          item.current ? ' bg-white text-primary-color' : ' text-dark-gray hover:bg-white hover:text-primary-color',
                           'rounded-md px-3 py-2 text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}

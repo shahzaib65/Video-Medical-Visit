@@ -22,7 +22,8 @@ module.exports = {
       "gray_rating": "#A9A9A9",
       "button_gray": "#D9D9D9",
       "tab_unselected": "#7B7B7B",
-      "line_gray": "#EBEBEB"
+      "line_gray": "#EBEBEB",
+      "red": "#FF0000"
     }
   },
   plugins: [],

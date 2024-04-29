@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Verification = () => {
+const VerifyOtp = () => {
      const {t} = useTranslation();
      const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ const {
         }
  axios.post("https://medico-backend-production.up.railway.app/api/patient/otp",code).then((response)=>{
   console.log(response.data.message)
-     navigate("/login");
+     navigate("/resetPassword");
       reset();
     }).catch((error)=>{
       console.log(error.message)
@@ -187,4 +187,4 @@ const {
   )
 }
 
-export default Verification
+export default VerifyOtp

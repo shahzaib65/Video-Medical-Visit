@@ -3,6 +3,7 @@ import Hero from '../../components/Hero';
 import PendingCard from '../../components/PendingCard';
 import ConfirmCard from '../../components/ConfirmCard';
 import { useTranslation } from 'react-i18next';
+import { Navbar } from '../../components/Navbar';
 
 const Appointments = () => {
   const {t} = useTranslation();
@@ -12,6 +13,7 @@ const Appointments = () => {
   };
   return (
     <div className='flex flex-col'>
+    <Navbar/>
       <Hero/>
       <div className=' container mx-auto mt-3'>
       <div className='flex'>

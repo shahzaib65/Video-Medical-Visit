@@ -1,9 +1,34 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import axios from 'axios';
 const ForgotPassword = () => {
     const {t} = useTranslation();
+
+    let navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+
+    const onSubmit = async (data) => {
+    console.log(data);
+    axios.post("https://medico-backend-production.up.railway.app/api/patient/checkEmail",data).then((response)=>{
+      localStorage.setItem("patientId", response.data.message);
+      navigate("/verifyOtp");
+      reset();
+    }).catch((error)=>{
+      console.log(error.message)
+    });
+   reset();
+  };
+
+
   return (
     <div className=' flex flex-row w-full h-auto'>
       <div className=' flex w-[50%] flex-col'>
@@ -14,32 +39,34 @@ const ForgotPassword = () => {
       </div>
 
        <div className=' flex items-start justify-start flex-col w-full mx-16 my-10'>
-       <form className=' w-[100%]'>
+       <form
+       onSubmit={handleSubmit(onSubmit)}
+        className=' w-[100%]'>
            <h4 className=' text-sm font-abc1 text-black font-medium'>{t('Email')}</h4>
            <div className="mt-2">
                 <input
                   id="email"
-                //   {...register('email', {
-                //     required: 'email is required',
-                //     pattern: {
-                //       value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
-                //       message: 'email not valid',
-                //     },
-                //   })}
+                  {...register('email', {
+                    required: 'email is required',
+                    pattern: {
+                      value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+                      message: 'email not valid',
+                    },
+                  })}
                   type="email"
                   placeholder='Example@gmail.com'
                   className="block w-[70%] font-abc1 font-normal rounded-[5px] border-0 h-[48px] text-dark-gray ring-1 ring-inset ring-border-color placeholder:text-dark-gray focus:ring-1 focus:ring-inset focus:ring-primary-color sm:text-sm sm:leading-6 px-3"
                 />
-                {/* {errors.email && (
-                  <p className="text-red-500">{errors.email.message}</p>
-                )} */}
+                {errors.email && (
+                  <p className="text-red">{errors.email.message}</p>
+                )}
               </div>
 
  
 
-        <Link to="/forgotVerification" className=' flex justify-center items-center w-[70%] bg-primary-color h-[56px] rounded-[4px] my-10'>
+        <button type="submit" className=' flex justify-center items-center w-[70%] bg-primary-color h-[56px] rounded-[4px] my-10'>
      <h1 className=' text-white font-abc1 text-[16px] font-bold' >{t('RequestPassword')}</h1>
-        </Link>
+        </button>
 
         
               

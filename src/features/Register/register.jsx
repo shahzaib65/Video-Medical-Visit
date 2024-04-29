@@ -1,9 +1,33 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import axios from 'axios';
+
 
 const Register = () => {
     const {t} = useTranslation();
+    let navigate = useNavigate();
+
+const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+
+   const onSubmit = async (data) => {
+    console.log(data);
+    axios.post("https://medico-backend-production.up.railway.app/api/patient/register",data).then((response)=>{
+     navigate("/forgotVerification");
+      reset();
+    }).catch((error)=>{
+      console.log(error.message)
+    });
+   reset();
+  };
+
   return (
     <div className=' flex flex-row w-full h-auto'>
 
@@ -16,91 +40,82 @@ const Register = () => {
       </div>
 
       <div className=' flex items-start justify-start flex-col w-full mx-16 my-10'>
-       <form className=' w-[100%]'>
+       <form className=' w-[100%]' 
+       onSubmit={handleSubmit(onSubmit)}
+       >
            <h4 className=' text-sm font-abc1 text-black font-medium'>{t('firstName')}</h4>
            <div className="mt-2">
                 <input
                   id="first"
-                //   {...register('email', {
-                //     required: 'email is required',
-                //     pattern: {
-                //       value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
-                //       message: 'email not valid',
-                //     },
-                //   })}
+                {...register("firstName", {
+                        required: "First name is required"
+                      })}
                   type="text"
                   placeholder='abc'
                   className="block w-[70%] font-abc1 font-normal rounded-[5px] border-0 h-[48px] text-dark-gray ring-1 ring-inset ring-border-color placeholder:text-dark-gray focus:ring-1 focus:ring-inset focus:ring-primary-color sm:text-sm sm:leading-6 px-3"
                 />
-                {/* {errors.email && (
-                  <p className="text-red-500">{errors.email.message}</p>
-                )} */}
+                {errors.firstName && (
+                  <p className="text-red">{errors.firstName.message}</p>
+                )}
               </div>
 
    <h4 className=' text-sm font-abc1 text-black font-medium mt-6'>{t('lastName')}</h4>
 <div className="mt-2">
                 <input
                   id="last"
-                //   {...register('email', {
-                //     required: 'email is required',
-                //     pattern: {
-                //       value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
-                //       message: 'email not valid',
-                //     },
-                //   })}
+              {...register("lastName", {
+                        required: "Last name is required"
+                      })}
                  type='text'
                   placeholder='abc'
                   className="block w-[70%] font-abc1 font-normal rounded-[5px] h-[48px] text-dark-gray ring-1 ring-inset ring-border-color placeholder:text-dark-gray focus:ring-1 focus:ring-inset focus:ring-primary-color sm:text-sm sm:leading-6 px-3"
                 />
-                {/* {errors.email && (
-                  <p className="text-red-500">{errors.email.message}</p>
-                )} */}
-
-   
-
+                {errors.lastName && (
+                  <p className="text-red">{errors.lastName.message}</p>
+                )}
               </div>
 
                <h4 className=' text-sm font-abc1 text-black font-medium mt-6'>{t('Email')}</h4>
 <div className="mt-2">
                 <input
                   id="email"
-                //   {...register('email', {
-                //     required: 'email is required',
-                //     pattern: {
-                //       value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
-                //       message: 'email not valid',
-                //     },
-                //   })}
+                  {...register('email', {
+                    required: 'email is required',
+                    pattern: {
+                      value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+                      message: 'email not valid',
+                    },
+                  })}
                  type='email'
                   placeholder='Example@gmail.com'
                   className="block w-[70%] font-abc1 font-normal rounded-[5px] h-[48px] text-dark-gray ring-1 ring-inset ring-border-color placeholder:text-dark-gray focus:ring-1 focus:ring-inset focus:ring-primary-color sm:text-sm sm:leading-6 px-3"
                 />
-                {/* {errors.email && (
-                  <p className="text-red-500">{errors.email.message}</p>
-                )} */}
-
-   
-
+                {errors.email && (
+                  <p className="text-red">{errors.email.message}</p>
+                )}
               </div>
 
                   <h4 className=' text-sm font-abc1 text-black font-medium mt-6'>{t('Password')}</h4>
 <div className="mt-2">
                 <input
                   id="password"
-                //   {...register('email', {
-                //     required: 'email is required',
-                //     pattern: {
-                //       value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
-                //       message: 'email not valid',
-                //     },
-                //   })}
+              {...register("password", {
+                  required: "Password is required",
+                  minLength: 8,
+                  pattern: {
+                    value:
+                      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+                    message:
+                      "must contain at least 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character",
+                  },
+                })}
                  type='text'
                   placeholder='*******'
                   className="block w-[70%] font-abc1 font-normal rounded-[5px] h-[48px] text-dark-gray ring-1 ring-inset ring-border-color placeholder:text-dark-gray focus:ring-1 focus:ring-inset focus:ring-primary-color sm:text-sm sm:leading-6 px-3"
                 />
-                {/* {errors.email && (
-                  <p className="text-red-500">{errors.email.message}</p>
-                )} */}
+                {errors.password && (
+                  <p className="text-red">{errors.password.message}</p>
+                )}
 
    
 
@@ -110,30 +125,20 @@ const Register = () => {
 <div className="mt-2">
                 <input
                   id="phone"
-                //   {...register('email', {
-                //     required: 'email is required',
-                //     pattern: {
-                //       value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
-                //       message: 'email not valid',
-                //     },
-                //   })}
+                {...register("phoneNumber", {
+              required: "Phone number is required",
+            })}
                  type='text'
                   placeholder='123456789'
                   className="block w-[70%] font-abc1 font-normal rounded-[5px] h-[48px] text-dark-gray ring-1 ring-inset ring-border-color placeholder:text-dark-gray focus:ring-1 focus:ring-inset focus:ring-primary-color sm:text-sm sm:leading-6 px-3"
                 />
-                {/* {errors.email && (
-                  <p className="text-red-500">{errors.email.message}</p>
-                )} */}
-
-   
-
+                {errors.phoneNumber && (
+                  <p className="text-red">{errors.phoneNumber.message}</p>
+                )}
               </div>
-
-       
-
-        <Link to="/forgotVerification" className=' flex justify-center items-center w-[70%] bg-primary-color h-[56px] rounded-[4px] my-10'>
+        <button type='submit' className=' flex justify-center items-center w-[70%] bg-primary-color h-[56px] rounded-[4px] my-10'>
      <h1 className=' text-white font-abc1 text-[16px] font-bold'>{t('SignUp')}</h1>
-        </Link>
+        </button>
 
         <div className=' flex justify-center items-center flex-row w-[70%]'>
         <h6 className=' text-dark-gray font-abc1 font-normal text-sm'>{t('alreadyAccount')}</h6>

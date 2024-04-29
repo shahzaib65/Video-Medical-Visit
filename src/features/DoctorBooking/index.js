@@ -6,7 +6,7 @@ const DoctorBooking = () => {
   
 const {t} = useTranslation();
 
- 
+
 
   return (
     <div className=' flex flex-col mt-7 mx-10 rounded-lg border-line_gray border'>
