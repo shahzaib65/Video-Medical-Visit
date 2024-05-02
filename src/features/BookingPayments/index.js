@@ -16,7 +16,7 @@ useEffect(()=>{
    setAppointments(response.data.appointment);
 
   }).catch((error)=>{
-    console.log(error)
+    console.log(error.message)
   })
 },[]);
 
