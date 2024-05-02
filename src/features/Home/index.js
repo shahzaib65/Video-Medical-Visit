@@ -122,27 +122,11 @@ const Home = () => {
     </div> */}
 
     <div className=' flex flex-row justify-between w-full'>
-    <Link to="/booking" className=' rounded-lg border border-primary-color ml-2 my-2 py-2 px-2 justify-center items-center'>
+    <Link to={`/booking/${e._id}`} className=' rounded-lg border border-primary-color ml-2 my-2 py-2 px-2 justify-center items-center'>
       <p className=' font-abc text-sm text-primary-color font-semibold'>{t('checkAvailability')}</p>
     </Link>
 
-     <div onClick={()=>{
-const data = {
-      "patientId": localStorage.getItem("patientId"),
-      "doctorId": e._id,
-      "time": "11:00",
-      "slot": "Evening",
-      "date": "29-04-2024"
-    }
-
-   axios.post("https://medico-backend-production.up.railway.app/api/booking/register",data).then((response)=>{
-     console.log(response)
-      reset();
-    }).catch((error)=>{
-      console.log(error.message)
-    });
-
-     }} className=' cursor-pointer rounded-lg bg-primary-color mr-2 my-2 py-2 px-3 justify-center items-center'>
+     <div  className=' cursor-pointer rounded-lg bg-primary-color mr-2 my-2 py-2 px-3 justify-center items-center'>
       <p className=' font-abc text-sm text-white font-semibold'>{t('bookNow')}</p>
     </div>
 

@@ -5,7 +5,8 @@ import { Bars3Icon, XMarkIcon,BellIcon } from "@heroicons/react/24/outline";
 import { Link } from 'react-router-dom';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 
-
+import logo from "../assets/Logo.svg";
+import Avatar from '../assets/avatar.svg';
 
 
 export const Navbar = () => {
@@ -14,8 +15,9 @@ export const Navbar = () => {
 
     const navigation = [
   { name: t('dashboard') , link: "/home" },
-  //  { name: t('favDoctors'), link: "/" },
-  { name: t('appointment'), link: "/appointments" }
+    // { name: t('favDoctors'), link: "/" },
+  { name: t('Payments'), link: "/paymentBookings" },
+  { name: t('appointment'), link: "/appointments" },
 ];
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -43,7 +45,7 @@ function classNames(...classes) {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="h-8 w-auto"
-                    src="./Logo.svg"
+                    src={logo}
                     alt="company logo"
                   />
                 </div>
@@ -83,7 +85,7 @@ function classNames(...classes) {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="./avatar.svg"
+                        src={Avatar}
                         alt=""
                       />
                     </Menu.Button>
@@ -100,31 +102,31 @@ function classNames(...classes) {
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          <Link
+                            to="/profile"
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-primary-color font-semibold')}
                           >
-                            Your Profile
-                          </a>
+                            {t('Profile')}
+                          </Link>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link to="/editPatientProfile"
+                           
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-primary-color font-semibold')}
+                          >
+                            {t('editProfile')}
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-primary-color font-semibold')}
                           >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Sign out
+                            {t('signOut')}
                           </a>
                         )}
                       </Menu.Item>

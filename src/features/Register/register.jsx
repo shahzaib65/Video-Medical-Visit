@@ -48,7 +48,7 @@ const {
                 <input
                   id="first"
                 {...register("firstName", {
-                        required: "First name is required"
+                        required: t('first_name_required')
                       })}
                   type="text"
                   placeholder='abc'
@@ -64,7 +64,7 @@ const {
                 <input
                   id="last"
               {...register("lastName", {
-                        required: "Last name is required"
+                        required: t('last_name_required')
                       })}
                  type='text'
                   placeholder='abc'
@@ -80,10 +80,10 @@ const {
                 <input
                   id="email"
                   {...register('email', {
-                    required: 'email is required',
+                    required: t('email_required'),
                     pattern: {
                       value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
-                      message: 'email not valid',
+                      message: t('email_validation'),
                     },
                   })}
                  type='email'
@@ -100,14 +100,8 @@ const {
                 <input
                   id="password"
               {...register("password", {
-                  required: "Password is required",
-                  minLength: 8,
-                  pattern: {
-                    value:
-                      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-                    message:
-                      "must contain at least 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character",
-                  },
+                  required: t(('password_required')),
+                  minLength: 8
                 })}
                  type='text'
                   placeholder='*******'
@@ -126,7 +120,7 @@ const {
                 <input
                   id="phone"
                 {...register("phoneNumber", {
-              required: "Phone number is required",
+              required: t('phone_required'),
             })}
                  type='text'
                   placeholder='123456789'

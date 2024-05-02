@@ -19,6 +19,7 @@ const Login = () => {
    const onSubmit = async (data) => {
     console.log(data);
     axios.post("https://medico-backend-production.up.railway.app/api/patient/login",data).then((response)=>{
+      console.log(response.data.user.id)
       localStorage.setItem("patientId", response.data.user.id);
        navigate("/home");
       reset();
@@ -48,10 +49,10 @@ const Login = () => {
                 <input
                   id="email"
                   {...register('email', {
-                    required: 'email is required',
+                    required: t('email_required'),
                     pattern: {
                       value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
-                      message: 'email not valid',
+                      message: t('email_validation'),
                     },
                   })}
                   type="email"
@@ -59,7 +60,7 @@ const Login = () => {
                   className="block w-[70%] font-abc1 font-normal rounded-[5px] border-0 h-[48px] text-dark-gray ring-1 ring-inset ring-border-color placeholder:text-dark-gray focus:ring-1 focus:ring-inset focus:ring-primary-color sm:text-sm sm:leading-6 px-3"
                 />
                 {errors.email && (
-                  <p className="text-red-500">{errors.email.message}</p>
+                  <p className="text-red">{errors.email.message}</p>
                 )}
               </div>
 
@@ -68,21 +69,15 @@ const Login = () => {
                 <input
                   id="password"
                 {...register("password", {
-                  required: "Password is required",
-                  minLength: 8,
-                  pattern: {
-                    value:
-                      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-                    message:
-                      "must contain at least 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character",
-                  },
+                  required: t('password_required'),
+                  minLength: 8
                 })}
                  type='text'
                   placeholder='**********'
                   className="block w-[70%] font-abc1 font-normal rounded-[5px] h-[48px] text-dark-gray ring-1 ring-inset ring-border-color placeholder:text-dark-gray focus:ring-1 focus:ring-inset focus:ring-primary-color sm:text-sm sm:leading-6 px-3"
                 />
                 {errors.password && (
-                  <p className="text-red-500">{errors.password.message}</p>
+                  <p className="text-red">{errors.password.message}</p>
                 )}
 
    
