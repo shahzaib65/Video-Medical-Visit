@@ -21,6 +21,9 @@ import PatientEditProfile from './features/PatientEditProfile/index.js';
 import BookingPayments from './features/BookingPayments/index.js';
 import JitsiMeet from './components/JitsiMeetComponent.jsx';
 import Success from './components/Success.jsx';
+import PatientDetails from './features/PatientDetails/index.js';
+import  DoctorEditProfile from "./features/DoctorEditProfilePage";
+import DoctorProfilePage from './features/DoctorProfilePage';
 
 function App() {
   return (
@@ -47,6 +50,9 @@ function App() {
       <Route path='/paymentBookings' element={<BookingPayments/>}/>
       <Route path='/calling' element={<JitsiMeet/>}/>
       <Route path='/success' element={<Success/>}/>
+      <Route path='/patientDetails' element={<PatientDetails/>}/>
+      <Route path='/doctorEditProfile' element={<DoctorEditProfile/>}/>
+      <Route path='/doctorProfilePage' element={<DoctorProfilePage/>}/>
      
    
     </Routes>

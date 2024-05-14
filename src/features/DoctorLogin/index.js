@@ -128,15 +128,17 @@ const DoctorLogin = () => {
           className=" container absolute bg-cover inset-0"
         />
         <div className="absolute inset-0 flex justify-between h-screen flex-col">
-          <div className=" h-[50%] flex justify-center items-center bottom-0 flex-col"></div>
-          <div className="flex justify-center items-center h-[50%]">
-            <div className=" h-[50%] flex justify-center items-center bottom-0 flex-col">
-              <h1 className=" font-abc1 text-[#000] font-bold text-[22px]">
+          <div className=" h-[50%] flex justify-center items-center bottom-0 flex-col">
+            <h1 className=" font-abc1 text-[#000] font-bold text-[22px]">
                 {t("ConnectDevice")}
               </h1>
               <p className=" font-abc1 text-[#000] text-[16px] font-medium">
                 {t("EveryThing")}
               </p>
+          </div>
+          <div className="flex justify-center items-center h-[50%]">
+            <div className=" h-[50%] flex justify-center items-center bottom-0 flex-col">
+              
             </div>
           </div>
         </div>
