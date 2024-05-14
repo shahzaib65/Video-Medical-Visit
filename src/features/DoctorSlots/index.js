@@ -143,7 +143,7 @@ const [time, setTime] = useState([
   return (
     <div className=' flex flex-col'>
      <DoctorNavbar/>
-
+   <div className=" h-[1px] w-full bg-line_gray"></div>
 
     <div className=' flex flex-row mx-[60px]'>
     <img className=' rounded-full w-40 h-40 border-2 border-primary-color object-cover' src='./doctor_profile.svg' alt='profile'/>

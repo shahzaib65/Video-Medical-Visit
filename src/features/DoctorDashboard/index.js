@@ -46,6 +46,8 @@ const DoctorDashboard = () => {
   return (
     <div className=' flex flex-col'>
     <DoctorNavbar/>
+       <div className=" h-[1px] w-full bg-line_gray"></div>
+   
    <DoctorHero/>
    
    <div className=' flex flex-row m-[60px] justify-evenly'>

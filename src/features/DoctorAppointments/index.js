@@ -6,8 +6,9 @@ import DoctorHero from '../../components/DoctorHero'
 
 const DoctorAppointments = () => {
   return (
-    <div>
+    <div className=' flex flex-col'>
     <DoctorNavbar/>
+     <div className=" h-[1px] w-full bg-line_gray"></div>
     <DoctorHero/>
       <CurrentAppointments/>
     </div>
