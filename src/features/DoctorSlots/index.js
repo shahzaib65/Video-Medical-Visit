@@ -1,6 +1,5 @@
 import React,{useState} from 'react';
 import { useTranslation } from 'react-i18next';
-import {Calendar} from "antd";
 import axios from "axios";
 import { DoctorNavbar } from '../../components/DoctorNavBar'
 
@@ -16,57 +15,34 @@ const DoctorSlots = () => {
     setActiveTab(tab);
   };
 
- const [selectedSlot, setSelectedSlot] = useState(null);
+
  const [selectedTime, setSelectedTime] = useState(null);
 
-const [timeSlot, setTimeSlot] = useState(null);
+
  const [hourTime, setHourTime] = useState(null);
  const[availableDate , setAvailableDate] = useState(null);
-
-
-  const handleSlot = (index) => {
-    setSelectedSlot(index);
-  };
+ const [visit, setVisit] = useState('');
+ const[followUp, setFollowUp] = useState('')
 
   const handleTime = (index) => {
     setSelectedTime(index);
   };
-
-  
-
    const  save =()=>{
-
     const data = {
       "time": hourTime,
-      "slot": timeSlot,
+      "slot": '',
       "date": availableDate,
     "doctorId": localStorage.getItem("doctorId")   
    }
-
-   
-
     axios.post("https://medico-backend-production.up.railway.app/api/slots/register",data).then((response)=>{
       console.log(response);
     }).catch((error)=>{
       console.log(error.message)
     });
-     }
+      }
 
 
 const {t} = useTranslation();
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const [time, setTime] = useState([
 {
@@ -117,6 +93,7 @@ const [time, setTime] = useState([
   }
   const [selectedDate, setSelectedDate] = useState(null);
 
+
  const [currentDate, setCurrentDate] = useState(new Date());
 
   const year = currentDate.getFullYear();
@@ -140,6 +117,14 @@ const [time, setTime] = useState([
   };
 
 
+    const handleVisitChange = (event) => {
+    setVisit(event.target.value);
+  };
+
+     const handleFollowUpChange = (event) => {
+    setFollowUp(event.target.value);
+  };
+
   return (
     <div className=' flex flex-col'>
      <DoctorNavbar/>
@@ -156,10 +141,14 @@ const [time, setTime] = useState([
     </div>
    
     <div className=' flex flex-row mt-4'>
-    <div className=' rounded-lg bg-primary-color text-center text-white px-3.5 py-1.5 font-abc font-medium text-[13px]'>
+    
+          
+    <div  className={`px-3.5 py-2 text-center rounded-lg font-medium font-abc text-[13px] ${activeTab === 'session' ? ' bg-primary-color text-white' : ' bg-[#D9D9D9] text-black'}`}
+          onClick={() => handleTabChange('session')}>
       $50/{t('session')}
     </div>
-    <div className=' rounded-lg bg-button_gray text-center text-black px-3.5 py-1.5 font-abc font-medium text-[13px] mx-2'>
+    <div  className={`px-6 py-2 rounded-lg font-abc text-[13px] font-medium mx-4 ${activeTab === 'followUp' ? ' bg-primary-color text-white' : ' bg-[#D9D9D9] text-black'}`}
+          onClick={() => handleTabChange('followUp')}>
       $25/{t('followUp')}
     </div>
 
@@ -169,90 +158,6 @@ const [time, setTime] = useState([
 
        <div className=' bg-line_gray h-px mt-4 mx-6'/>
 
-{/* <div className=' flex flex-col mt-7 mx-10 rounded-lg border-line_gray border'>
-     
-   <h1 className=' font-abc font-bold text-[24px] m-4 text-[#000000]'>{t('selectHour')}</h1>
-
- <div className=' flex flex-row'>
-  {
-    time.map((e,index)=>(
-        
-<div key={index}
- onClick={() => {
-  handleTime(index);
-  setHourTime(e.time);
-
- }}
-  className={` w-[8%] rounded-lg  border-2 py-1.5 m-6  cursor-pointer text-[#000] font-abc text-[14px] font-semibold ${
-              selectedTime === index ? 'bg-[#022C4933] text-primary-color border-primary-color' : 'bg-white text-[#000] border-[#000]'
-            }`}
- >
-      <h1 className=' text-primary-color font-abc text-[13px] text-center font-medium' >{e.time}</h1>
-        </div>
-    ))
-   }
- </div>
-
-  <h1 className=' font-abc font-bold text-[24px] m-4 text-[#000000]'>{t('selectSlot')}</h1>
-
- <div className=' flex flex-row'>
-  {
-    slot.map((e,index)=>(
-        
-<div 
-key={index} 
- onClick={() => {
-  handleSlot(index);
-  setTimeSlot(e.slot);
- }}
- className={` w-[8%] rounded-lg  border-2 py-1.5 m-6  cursor-pointer text-[#000] font-abc text-[14px] font-semibold ${
-              selectedSlot === index ? 'bg-[#022C4933] text-primary-color border-primary-color' : 'bg-white text-[#000] border-[#000]'
-            }`}>
-      <h1 className=' text-primary-color text-center font-abc text-[13px] font-medium' >{e.slot}</h1>
-        </div>
-    ))
-   }
- </div>
-
- <h1 className=' font-abc font-bold text-[24px] m-4 text-[#000000]'>{t('visitPrice')}</h1>
-
-   <div className=' container mx-4 mt-3'>
-      <div className='flex'>
-      <button
-          className={`px-6 py-2 rounded-lg font-abc text-[16px] font-semibold ${activeTab === 'visit' ? ' bg-primary-color text-white' : ' bg-white text-tab_unselected'}`}
-          onClick={() => handleTabChange('visit')}
-        >
-           $50/{t('session')}
-        </button>
-
-  <button
-          className={`px-6 py-2 rounded-lg ont-abc text-[16px] font-semibold ${activeTab === 'followUp' ? 'bg-primary-color text-white' : 'bg-white text-tab_unselected'}`}
-          onClick={() => handleTabChange('followUp')}
-        >
-         $25/{t('followUp')}
-        </button>
-
-      </div>
-      </div>
-<h1 className=' font-abc font-bold text-[24px] m-4 text-[#000000]'>{t('selectDate')}</h1>
-<Calendar className=' my-2'
-    onSelect={(date)=>{
-        setAvailableDate(date.format('DD/MMMM/YYYY'));
-    }}
-    disabledDate={(date)=>{
-        if(new Date(date).getDate > 24){
-            return true
-        }else{
-            return false
-        }
-    }}
-/>
-
-<div onClick={save} className=' my-4 cursor-pointer bg-primary-color rounded-lg justify-center items-center w-[10%] mx-10'>
- <p className=' text-white font-abc1 font-semibold text-sm items-center text-center py-3'>{t('save')}</p>
-  </div>
-
-    </div> */}
 
 
   <div className=' flex flex-col rounded-md border border-line_gray mx-[60px] my-2'>
@@ -265,6 +170,7 @@ key={index}
     <div className=' flex flex-col'>
 <div key={index} onClick={()=>{
   handleDate(index);
+  setAvailableDate(item.toLocaleDateString('it-IT', { month: 'long', day: 'numeric', locale: 'it-IT' }));
 }}  
 className={`font-abc cursor-pointer flex flex-col  font-medium text-[20px] text-dark-gray py-2.5 mt-1 mx-10 ${
               selectedDate === index ? ' text-primary-color border-b-2 border-primary-color' : ' text-[#000] border-[#fff]'
@@ -289,12 +195,15 @@ className={`font-abc cursor-pointer flex flex-col  font-medium text-[20px] text-
   <div className=' grid lg:grid-cols-6 gap-5 md:grid-cols-1 sm:grid-cols-1 p-2"'>
  {
     time.map((index)=>(
-<div className=' flex flex-col h-24 justify-between w-52 mx-5'>
- <div className=' rounded-tl-md rounded-tr bg-primary-color h-[72px]'>
+<div key={index} onClick={()=>{
+  handleTime(index);
+  setHourTime(index.time);
+ }} className=' flex flex-col h-24 justify-between w-52 mx-5'>
+ <div  className={`rounded-tl-md rounded-tr bg-[#E1E6E9] h-[72px] ${selectedTime === index ? ' bg-primary-color' : ' bg-[#E1E6E9]'}`}>
   
  </div>
 
- <div className=' rounded-bl-md rounded-br bg-[#E1E6E9] h-[72px]  justify-center items-center'>
+ <div key={index} className={`rounded-bl-md rounded-br border border-line_gray  h-[72px]  justify-center items-center ${selectedTime === index ? 'bg-[#E1E6E9]' : 'bg-white'}`}>
   <p className=' items-center text-center h-full font-abc font-bold text-lg mt-2 w-full'>{index.time}</p>
  </div>
 
@@ -302,12 +211,7 @@ className={`font-abc cursor-pointer flex flex-col  font-medium text-[20px] text-
     ))
   }
   </div>
-
   </div>
- 
-
- 
-
 </div>
 
 
@@ -316,19 +220,28 @@ className={`font-abc cursor-pointer flex flex-col  font-medium text-[20px] text-
 <div className='flex flex-row mx-5 mb-9'>
 <div className=' w-[50%] flex flex-col justify-start items-start'>
 <h1 className=' font-abc font-semibold text-[14px]  text-primary-color'>{t('session')}</h1>
-    <p className=" w-[70%] font-abc1 mt-2 font-normal py-2.5 rounded-[5px] h-[48px] text-dark-gray ring-1 ring-inset ring-border-color placeholder:text-dark-gray focus:ring-1 focus:ring-inset focus:ring-primary-color sm:text-sm sm:leading-6 px-3"></p>
+    <input
+     value={visit}
+            onChange={handleVisitChange}
+    
+     className=" w-[70%] font-abc1 mt-2 font-normal py-2.5 rounded-[5px] h-[48px] text-dark-gray ring-1 ring-inset ring-border-color placeholder:text-dark-gray focus:ring-1 focus:ring-inset focus:ring-primary-color sm:text-sm sm:leading-6 px-3"></input>
 </div>
 
 <div className=' w-[50%] flex flex-col justify-start items-start'>
 <h1 className=' font-abc font-semibold text-[14px]  text-primary-color'>{t('followUp')}</h1>
-    <p className=" w-[70%] font-abc1 mt-2 font-normal py-2.5 rounded-[5px] h-[48px] text-dark-gray ring-1 ring-inset ring-border-color placeholder:text-dark-gray focus:ring-1 focus:ring-inset focus:ring-primary-color sm:text-sm sm:leading-6 px-3"></p>
+    <input
+    value={followUp}
+    onChange={handleFollowUpChange}
+     className=" w-[70%] font-abc1 mt-2 font-normal py-2.5 rounded-[5px] h-[48px] text-dark-gray ring-1 ring-inset ring-border-color placeholder:text-dark-gray focus:ring-1 focus:ring-inset focus:ring-primary-color sm:text-sm sm:leading-6 px-3"></input>
 </div>
   
 </div>
 
   <div className=" flex justify-end items-end mx-4 my-2">
-          <button
-            type="submit"
+          <button onClick={()=>{
+           save();
+          }}
+         
             className=" bg-primary-color px-6 py-2 m-4 rounded-lg items-end font-abc font-bold text-white text-sm"
           >
              {t("save")}

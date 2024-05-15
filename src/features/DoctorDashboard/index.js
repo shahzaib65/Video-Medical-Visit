@@ -77,7 +77,7 @@ const DoctorDashboard = () => {
 
    <div className=' flex flex-row justify-between mx-40 mb-4'>
 
-     <div className=' rounded-md border-2 w-1/2 mr-5 border-line_gray flex flex-col'>
+     {/* <div className=' rounded-md border-2 w-1/2 mr-5 border-line_gray flex flex-col'>
      <div className=' flex flex-row justify-between m-5'>
      <p className=' text-[#000] font-abc font-bold text-[16px]'>{t('appointmentRequest')}</p>
      <p className=' text-[#9C9C9C] font-abc font-semibold text-[16px]'>{t('seeAll')}</p>
@@ -106,10 +106,10 @@ const DoctorDashboard = () => {
       ))
     }
 
-     </div>
+     </div> */}
 
 
-      <div className=' rounded-md border-2 w-1/2 border-line_gray flex flex-col'>
+      <div className=' rounded-md border-2  m-[10px] w-full border-line_gray flex flex-col'>
       <div className=' flex flex-row justify-between m-5'>
      <p className=' text-[#000] font-abc font-bold text-[16px]'>{t('todayAppointment')}</p>
      <p className=' text-[#9C9C9C] font-abc font-semibold text-[16px]'>{t('seeAll')}</p>
