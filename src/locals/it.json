@@ -55,7 +55,7 @@
   "sex": "Sesso",
   "patient": "Paziente",
   "Payments": "Pagamenti",
-  "doctor": "Medico",
+  "doctor": "Dottore",
   "dashboard": "Panoramica",
   "favDoctors": "Preferito Medico",
   "appointment": "Appuntamenti",
@@ -144,7 +144,7 @@
   "confirmed": "Conferma",
   "todayAppointment": "Appuntamenti Giornalieri",
   "appointmentDate": "Data Appuntamento",
-  "patient": "Pazient",
+  "patient": "Paziente",
   "bookingDate": "Data Prenotazione",
   "amount": "Fattura",
   "status": "Status",
@@ -155,6 +155,9 @@
   "special_recognition": "Premi o Riconoscimenti",
   "Office/hospital address": "Indirizzo Studio",
   "digital_signature": "Firma Digitalizzata",
-  "select_signature": "Select Signatur"
+  "select_signature": "Select Signatur",
+  "admin": "Pannello di amministrazione"
+  
+  
 
 }

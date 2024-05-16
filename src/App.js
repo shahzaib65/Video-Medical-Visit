@@ -24,12 +24,13 @@ import Success from './components/Success.jsx';
 import PatientDetails from './features/PatientDetails/index.js';
 import  DoctorEditProfile from "./features/DoctorEditProfilePage";
 import DoctorProfilePage from './features/DoctorProfilePage';
+import Guest from './features/Guest/index.js';
 
 function App() {
   return (
    <Router>
     <Routes>
-      <Route path="/" element={<Login/>}/>
+      <Route path="/" element={<Guest/>}/>
       <Route path='/register' element={<Register/>} />
       <Route path='/forgot' element={<ForgotPassword/>}/>
       <Route path='/forgotVerification' element={<ForgotVerification/>}/>
