@@ -2,7 +2,7 @@ import React,{useEffect, useState} from "react";
 import { Navbar } from "../../components/Navbar";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-
+import avatar from "../../assets/user.png"
 const Profile = () => {
 
   const {t} = useTranslation();
@@ -13,6 +13,7 @@ const Profile = () => {
       "id": localStorage.getItem("patientId")
      }
   axios.post("https://medico-backend-production.up.railway.app/api/patient/profile",data).then((response)=>{
+    console.log(response)
    
     setProfileData(response.data.message);
 
@@ -32,7 +33,8 @@ const Profile = () => {
         <div className=" flex justify-start items-start m-10">
           <img
             className=" rounded-full w-[100px] h-[100px] border-2 border-primary-color object-cover"
-            src={profileData.picture_url ? profileData.picture_url : './doctor_profile.svg'}
+         
+             src={profileData.picture_url ? profileData.picture_url : avatar}
             alt="profile"
           />
         </div>

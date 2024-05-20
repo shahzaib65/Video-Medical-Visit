@@ -1,15 +1,14 @@
 import React,{Fragment} from 'react'
 import { useTranslation } from 'react-i18next';
-
 import { Bars3Icon, XMarkIcon,BellIcon } from "@heroicons/react/24/outline";
 import { Link } from 'react-router-dom';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-
 import logo from "../assets/Logo.svg";
-import Avatar from '../assets/avatar.svg';
+import { useNavigate } from 'react-router-dom';
 
 
 export const GuestNavBar = () => {
+  const navigate = useNavigate()
 
     const {t} = useTranslation();
 
@@ -70,19 +69,12 @@ function classNames(...classes) {
                 </div>
               </div>
               <div className="absolute inset-y-0 gap-3 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <button className=' rounded-md border border-primary-color text-primary-color px-3 font-semibold text-[14px] py-1.5
+              <button onClick={()=>{
+                navigate("/login")
+              }} className=' rounded-md border border-primary-color text-primary-color px-3 font-semibold text-[14px] py-1.5
                '>{t('patient')}</button>
               <button className=' rounded-md bg-primary-color text-white px-5 font-semibold text-[14px] py-2'>{t('doctor')}</button>
-                {/* <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-primary-color focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button> */}
-
-                {/* Profile dropdown */}
+              
              
               </div>
             </div>

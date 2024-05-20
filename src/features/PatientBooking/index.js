@@ -18,38 +18,13 @@ const {t} = useTranslation();
 
 const[session_fee,setSessionFee] = useState('')
 
-  const [data,setData] = useState([
-    {
-      "date": "Aprile 21",
-      "id": "1"
-    },
-    {
-      "date": "Aprile 22",
-      "id": "2"
-    },
-     {
-      "date": "Aprile 23",
-      "id": "3"
-    },
-    {
-      "date": "Aprile 24",
-      "id": "4"
-    },
-     {
-      "date": "Aprile 25",
-      "id": "5"
-    },
-    {
-      "date": "Aprile 26",
-      "id": "6"
-    },
 
-  ])
+  const [data,setData] = useState([])
 
      const {id} = useParams();
-     console.log(id)
+    
 
-    const [activeTab, setActiveTab] = useState('visit');
+    const [activeTab, setActiveTab] = useState('');
     const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
@@ -96,6 +71,7 @@ useEffect(()=>{
 
    axios.post("https://medico-backend-production.up.railway.app/api/slots/getSlots",data).then((response)=>{
     setDoctorInfo(response.data.doctorInfo);
+    setData(response.data.slot)
    }).catch((error)=>{
     console.log(error.message);
    })
@@ -116,16 +92,52 @@ useEffect(()=>{
       "session_fee": session_fee,
       "date": Date
     }
-
    axios.post("https://medico-backend-production.up.railway.app/api/booking/register",data).then((response)=>{
-    console.log(response.data)
-     alert("Your booking is done please go to the payment tab for the payment")
+    
+    console.log(id,doctorInfo.firstName+doctorInfo.lastName,session_fee,doctorInfo.specialist)
+    makePayment(id,doctorInfo.firstName+doctorInfo.lastName,session_fee,doctorInfo.specialist)
+     
      
     }).catch((error)=>{
       console.log(error.message)
     });
   }
       
+ }
+
+ const makePayment = async(doctorId,name,price,service) => {
+  
+
+   const patientId = localStorage.getItem("patientId")
+       try {
+        const res = await fetch("http://192.168.1.5:5000/api/payment/checkout",{
+            method: "POST",
+            headers: { 
+              'content-type': 'application/json' },
+            mode: "cors", 
+            body: JSON.stringify({
+              items: [
+                {
+                    id: 1,
+                quantity: 1,
+                price: price,
+                name: name,
+                description: "testing the data"
+                }
+            ],
+             patientId: patientId,
+             doctorId: doctorId,
+             visit_fee: price,
+             service: service
+           }),
+        });
+        const data = await res.json()
+        console.log(data)
+        window.location = data.url
+       } catch (error) {
+        console.log(error.message)
+       }
+
  }
 
 
@@ -145,31 +157,32 @@ useEffect(()=>{
     <h1 className=' font-abc font-semibold text-[24px] text-primary-color'>{doctorInfo.firstName} {doctorInfo.lastName}</h1>
     <h3 className=' font-abc font-normal text-[18px] text-gray_rating'>{doctorInfo.specialist}</h3>
     <h6 className=' font-abc font-normal text-[14px] text-gray_rating'>{doctorInfo.location}</h6>
-    <div className=' flex flex-row mt-4'>
-
-
-
+   {
+    data.length>0 &&( <div className=' flex flex-row mt-4'>
       <button
           className={`px-6 py-2 rounded-lg font-abc text-[16px] font-semibold ${activeTab === 'visit' ? ' bg-primary-color text-white' : ' bg-[#D9D9D9] text-[#000]'}`}
           onClick={() => {
 handleTabChange('visit');
-setSessionFee(50)
+setSessionFee(data[0].visit_price)
           }}
         >
-           $50/{t('session')}
+       
+        ${data[0].visit_price}/{t('session')} 
+       
         </button>
 
   <button
           className={`px-6 py-2 rounded-lg ont-abc text-[16px] mx-2 font-semibold ${activeTab === 'followUp' ? 'bg-primary-color text-white' : 'bg-[#D9D9D9] text-[#000]'}`}
           onClick={() => {
             handleTabChange('followUp');
-            setSessionFee(25);
+            setSessionFee(data[0].follow_up_price);
           }}
         >
-         $25/{t('followUp')}
+         ${data[0].follow_up_price}/{t('followUp')}
         </button>
 
-    </div>
+    </div>)
+   }
     </div>
     </div>
 
@@ -208,7 +221,7 @@ setSessionFee(50)
 
       <div className=' flex flex-row'>
   {
-    time.map((e,index)=>(
+    data.map((e,index)=>(
         
 <div key={index}
  onClick={() => {
@@ -225,8 +238,6 @@ setSessionFee(50)
     ))
    }
  </div>
-   
-
     </div>
 
    </div>

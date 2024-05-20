@@ -3,7 +3,7 @@
   "journey": "Inserisci i tuoi dati per accedere alla piattaforma.",
   "Email": "E-mail",
   "Password": "Password",
-  "ForgotPassword": "Forgot Password?",
+  "ForgotPassword": "Password dimenticata?",
   "Login": "Login",
   "NotAccount":"Non hai ancora un account?",
   "SignUp": "Iscriviti",
@@ -31,7 +31,7 @@
   "bookNow": "Prenota",
   "cancel": "Annulla",
   "wait": "Aspettare",
-  "consultNow": "Consulta ora",
+  "consultNow": "Partecipa alla Televisita",
   "pending": "In attesa di",
   "confirm": "Confermare",
   "session": "Prima visita",
@@ -156,7 +156,13 @@
   "Office/hospital address": "Indirizzo Studio",
   "digital_signature": "Firma Digitalizzata",
   "select_signature": "Select Signatur",
-  "admin": "Pannello di amministrazione"
+  "admin": "Pannello di amministrazione",
+  "myProfile": "Profilo",
+  "language": "Lingua",
+  "privacy_policy": "Informativa Privacy",
+  "terms&condition": "Termini&Condizioni",
+  "Fav.Doctors": "Preferiti",
+  "settings": "Impostazioni"
   
   
 

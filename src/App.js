@@ -25,12 +25,13 @@ import PatientDetails from './features/PatientDetails/index.js';
 import  DoctorEditProfile from "./features/DoctorEditProfilePage";
 import DoctorProfilePage from './features/DoctorProfilePage';
 import Guest from './features/Guest/index.js';
+import PatientSetting from './features/PatientSetting/index.js';
 
 function App() {
   return (
    <Router>
     <Routes>
-      <Route path="/" element={<Guest/>}/>
+      <Route path="/" element={<Login/>}/>
       <Route path='/register' element={<Register/>} />
       <Route path='/forgot' element={<ForgotPassword/>}/>
       <Route path='/forgotVerification' element={<ForgotVerification/>}/>
@@ -54,6 +55,8 @@ function App() {
       <Route path='/patientDetails' element={<PatientDetails/>}/>
       <Route path='/doctorEditProfile' element={<DoctorEditProfile/>}/>
       <Route path='/doctorProfilePage' element={<DoctorProfilePage/>}/>
+      <Route path='/favorite' element={<FavDoctor/>}/>
+      <Route path='/settings' element={<PatientSetting/>}/>
      
    
     </Routes>

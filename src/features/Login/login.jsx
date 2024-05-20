@@ -19,7 +19,6 @@ const Login = () => {
    const onSubmit = async (data) => {
     console.log(data);
     axios.post("https://medico-backend-production.up.railway.app/api/patient/login",data).then((response)=>{
-      console.log(response.data.user.id)
       localStorage.setItem("patientId", response.data.user.id);
        navigate("/home");
       reset();

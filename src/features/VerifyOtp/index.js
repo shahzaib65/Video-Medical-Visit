@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect, useRef} from 'react';
 import {useTranslation} from 'react-i18next';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,21 @@ import axios from 'axios';
 const VerifyOtp = () => {
      const {t} = useTranslation();
      const navigate = useNavigate();
+
+     const in1 = useRef(null)
+     const in2 = useRef(null)
+     const in3 = useRef(null)
+     const in4 = useRef(null)
+     const in5 = useRef(null)
+     const in6 = useRef(null)
+
+     const handleInputChange = (e,nextInputRef) =>{
+      if(e.target.value.length === 1 && nextInputRef.current){
+   nextInputRef.current.focus();
+      }
+     }
+
+     
 
 const {
     register,
@@ -50,6 +65,8 @@ const {
        <div className=' flex flex-row mt-2 w-[70%] justify-center items-center'>
       
    <input
+   ref={in1}
+   onChange={(e)=> handleInputChange(e,in2)}
                  {...register("one", {
                         required: "Please enter the code",
                          pattern:{
@@ -66,6 +83,8 @@ const {
                 )} */}
 
 <input
+ref={in2}
+   onChange={(e)=> handleInputChange(e,in3)}
                 {...register("two", {
                         required: "Please enter the code",
                          pattern:{
@@ -82,6 +101,8 @@ const {
                 )} */}
 
                 <input
+                ref={in3}
+   onChange={(e)=> handleInputChange(e,in4)}
                 {...register("three", {
                         required: "Please enter the code",
                          pattern:{
@@ -97,6 +118,8 @@ const {
                   <p className="text-red">{errors.three.message}</p>
                 )} */}
                 <input
+                ref={in4}
+   onChange={(e)=> handleInputChange(e,in5)}
                 {...register("four", {
                         required: "Please enter the code",
                          pattern:{
@@ -115,6 +138,8 @@ const {
 
 
                 <input
+                ref={in5}
+   onChange={(e)=> handleInputChange(e,in6)}
                 {...register("five", {
                         required: "Please enter the code",
                          pattern:{
@@ -132,6 +157,8 @@ const {
 
 
                 <input
+                ref={in6}
+   onChange={(e)=> handleInputChange(e,null)}
                {...register("six", {
                         required: "Please enter the code",
                          pattern:{

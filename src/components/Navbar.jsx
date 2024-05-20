@@ -6,8 +6,7 @@ import { Link } from 'react-router-dom';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 
 import logo from "../assets/Logo.svg";
-import Avatar from '../assets/avatar.svg';
-
+import avatar from "../assets/user.png";
 
 export const Navbar = () => {
 
@@ -15,7 +14,7 @@ export const Navbar = () => {
 
     const navigation = [
   { name: t('dashboard') , link: "/home" },
-    // { name: t('favDoctors'), link: "/" },
+   { name: t('Fav.Doctors'), link: "/favorite" },
   { name: t('Payments'), link: "/paymentBookings" },
   { name: t('appointment'), link: "/appointments" },
 ];
@@ -85,7 +84,7 @@ function classNames(...classes) {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src={Avatar}
+                        src={avatar}
                         alt=""
                       />
                     </Menu.Button>
@@ -128,6 +127,16 @@ function classNames(...classes) {
                           >
                             {t('signOut')}
                           </a>
+                        )}
+                      </Menu.Item>
+                       <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            to="/settings"
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-primary-color font-semibold')}
+                          >
+                            {t('settings')}
+                          </Link>
                         )}
                       </Menu.Item>
                     </Menu.Items>

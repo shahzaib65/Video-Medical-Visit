@@ -23,7 +23,7 @@ const Footer = () => {
 
 
   <div className=' w-[20%] flex flex-col items-center mt-14'>
-  <p className=' font-abc1 font-semibold text-lg text-white'>
+  <p className=' font-abc1 font-semibold text-[20px] text-white'>
     Page
   </p>
 
@@ -31,8 +31,8 @@ const Footer = () => {
 
   </div>
 
-  <div className=' w-[20%] flex flex-col items-center mt-14'>
-  <p className=' font-abc1 font-semibold text-lg text-white'>
+  <div className=' w-[10%] flex flex-col items-start mt-14 '>
+  <p className=' font-abc1 font-semibold text-[20px] text-white'>
     Book now
   </p>
 
@@ -41,7 +41,7 @@ const Footer = () => {
   </div>
 
   <div className=' w-[30%] flex flex-col items-start mt-14'>
-  <p className=' font-abc1 font-semibold text-lg text-white'>
+  <p className=' font-abc1 font-semibold text-[20px] text-white'>
     Contact US
   </p>
 
